@@ -21,6 +21,39 @@ SharedPtr<T>::SharedPtr()
 }
 
 template <typename T>
+SharedPtr<T>::~SharedPtr()
+{
+    --(*count);
+    if (*count == 0) {
+        delete count;
+        count = new int {};
+        delete _p;
+        _p = nullptr;
+    }
+}
+
+template <typename T>
+SharedPtr<T>::SharedPtr(const SharedPtr<T>& Ptr)
+    : _p { Ptr._p }
+    , count { Ptr.count }
+{
+    ++(*count);
+}
+
+template <typename T>
+SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T>& Ptr)
+{
+    if (this == &Ptr)
+        return *this;
+    delete count;
+    delete _p;
+    _p = Ptr._p;
+    count = Ptr.count;
+    ++(*count);
+    return *this;
+}
+
+template <typename T>
 size_t SharedPtr<T>::use_count()
 {
     return static_cast<size_t>(*count);
