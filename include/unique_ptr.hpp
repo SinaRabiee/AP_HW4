@@ -64,3 +64,12 @@ T* UniquePtr<T>::release()
     _p = nullptr;
     return Ptr;
 }
+
+template <typename T>
+UniquePtr<T>::operator bool() const
+{
+    if (_p == nullptr)
+        return false;
+    else
+        return true;
+}
