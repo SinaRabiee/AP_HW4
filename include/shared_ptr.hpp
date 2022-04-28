@@ -54,9 +54,9 @@ SharedPtr<T>& SharedPtr<T>::operator=(const SharedPtr<T>& Ptr)
 }
 
 template <typename T>
-size_t SharedPtr<T>::use_count()
+int SharedPtr<T>::use_count()
 {
-    return static_cast<size_t>(*count);
+    return *count;
 }
 
 template <typename T>

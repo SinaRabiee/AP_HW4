@@ -11,13 +11,12 @@ public:
     ~SharedPtr();
     SharedPtr(const SharedPtr& Ptr);
     SharedPtr<T>& operator=(const SharedPtr& Ptr);
-    size_t use_count();
+    int use_count();
     T* get();
     T& operator*();
     T* operator->();
     void reset();
     void reset(T* arr);
-    T* release();
     operator bool() const;
 
 private:
